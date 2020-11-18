@@ -9,6 +9,6 @@ class Crypto
 public:
 	vector<float> Encrypt(vector<float>, Matrix key);
 	vector<float> Decrypt(vector<float>, Matrix key, bool isDecryptionKey);
-	string toString(int data[]);
+	string toString(vector<float> data);
 };
 

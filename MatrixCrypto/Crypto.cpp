@@ -1,6 +1,6 @@
 #include "Crypto.h"
 
-vector<float> Crypto::Encrypt(std::vector<float> inputData, Matrix key)
+vector<float> Crypto::Encrypt(vector<float> inputData, Matrix key)
 {
 	//Support for data that is not a length that is a multiple of key.cols
 	while (inputData.size() % key.cols != 0)
@@ -41,13 +41,13 @@ vector<float> Crypto::Decrypt(vector<float> inputData, Matrix key, bool isDecryp
 
 	Matrix decryptionKey = (isDecryptionKey ? key : key.CalculateInverse());
 
-	std::vector<float> chunk;
+	vector<float> chunk;
 	for (int i = 0; i <= inputData.size(); ++i)
 	{
 		if ((i % decryptionKey.cols == 0) && i != 0)
 		{
 			//Encrypt chunk, append to retVal, and clear chunk
-			std::vector<float> encryptedChunk = key.multiply_by_vector(chunk);
+			std::vector<float> encryptedChunk = decryptionKey.multiply_by_vector(chunk);
 
 			//append to retVal
 			for (int j = 0; j < encryptedChunk.size(); ++j)
@@ -66,9 +66,12 @@ vector<float> Crypto::Decrypt(vector<float> inputData, Matrix key, bool isDecryp
 	return retVal;
 }
 
-string Crypto::toString(int data[])
+string Crypto::toString(vector<float> data)
 {
 	string retVal = "";
-
+	for (int i = 0; i < data.size(); ++i)
+	{
+		retVal += (char)data[i];
+	}
 	return retVal;
 }

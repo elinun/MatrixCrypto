@@ -50,7 +50,7 @@ Matrix Matrix::CalculateInverse()
         augmentedMatrix.push_back(columnI);
     }
 
-    //test_print(augmentedMatrix);
+
 
     //RREF
     //https://en.wikipedia.org/wiki/Gaussian_elimination#Pseudocode
